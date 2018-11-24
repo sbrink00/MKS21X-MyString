@@ -1,16 +1,22 @@
-public class MyString implements CharSequence{
+public class MyString implements CharSequence, Comparable<CharSequence>{
   private char[] data;
 
   public static void main(String[]args){
     MyString a = new MyString("hello");
-    System.out.println(a);
-    System.out.println(a.toString());
-    System.out.println(a.length());
-    System.out.println(a.charAt(3));
-    System.out.println(a.subSequence(0,3));
-    a = new MyString(a.subSequence(0,3));
-    System.out.println(a);
-
+    //System.out.println(a.subSequence(1,3));
+    //a = a.subSequence(1,3);
+    //System.out.println(a);
+    //System.out.println(a);
+    //System.out.println(a.toString());
+    //System.out.println(a.length());
+    //System.out.println(a.charAt(3));
+    //System.out.println(a.subSequence(0,3));
+    //a = new MyString(a.subSequence(0,3));
+    //System.out.println(testNum);
+    MyString s1 = new MyString("hell");
+    MyString s2 = new MyString("hellurmom");
+    System.out.println(s1.compareTo(s2));
+    System.out.println("hell".compareTo("hellurmom"));
   }
 
   public MyString(CharSequence s){
@@ -28,12 +34,12 @@ public class MyString implements CharSequence{
     return data[idx];
   }
 
-  public CharSequence subSequence(int start, int end){
+  public MyString subSequence(int start, int end){
     String output = new String("");
     for (int idx = start; idx < end; idx ++){
       output += this.charAt(idx);
     }
-    return output;
+    return new MyString(output);
   }
 
   public String toString(){
@@ -42,6 +48,18 @@ public class MyString implements CharSequence{
       output += data[idx];
     }
     return output;
+  }
+
+  public int compareTo(CharSequence other){
+    if (this.length() != other.length()) return this.length() - other.length();
+    for (int idx = 0; idx < this.length(); idx ++){
+      char thisCurrentChar = this.charAt(idx);
+      char otherCurrentChar = other.charAt(idx);
+      int me = (int) thisCurrentChar;
+      int you = (int) otherCurrentChar;
+      if (me - you != 0) return me - you;
+    }
+    return 0;
   }
 
 }

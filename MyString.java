@@ -13,10 +13,10 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
     //System.out.println(a.subSequence(0,3));
     //a = new MyString(a.subSequence(0,3));
     //System.out.println(testNum);
-    MyString s1 = new MyString("hell");
-    MyString s2 = new MyString("hellurmom");
+    MyString s1 = new MyString("bbbbbb");
+    MyString s2 = new MyString("a");
     System.out.println(s1.compareTo(s2));
-    System.out.println("hell".compareTo("hellurmom"));
+    System.out.println("bbbbbb".compareTo("a"));
   }
 
   public MyString(CharSequence s){
@@ -51,7 +51,9 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
   }
 
   public int compareTo(CharSequence other){
-    if (this.length() != other.length()) return this.length() - other.length();
+    int limit;
+    if (this.length() > other.length()) limit = other.length();
+    else limit = this.length();
     for (int idx = 0; idx < this.length(); idx ++){
       char thisCurrentChar = this.charAt(idx);
       char otherCurrentChar = other.charAt(idx);
@@ -59,6 +61,7 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
       int you = (int) otherCurrentChar;
       if (me - you != 0) return me - you;
     }
+    if (this.length() != other.length()) return this.length() - other.length();
     return 0;
   }
 
